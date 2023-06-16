@@ -1,4 +1,5 @@
 node_modules
+dist
 
 # Logs
 logs
@@ -11,4 +12,4 @@ lerna-debug.log*
 
 package-lock.json
 
-.env
+# .env
