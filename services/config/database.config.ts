@@ -1,14 +1,10 @@
-import dotenv from "dotenv"
 import mongoose from "mongoose"
 
-dotenv.config()
-const MONGO_URI: any = process.env.MONGO_URI
-
-class DBConnection {
+export class DBConnection {
   private static instance: DBConnection
   private constructor() {
     mongoose.set("strictQuery", false)
-    mongoose.connect(MONGO_URI)
+    mongoose.connect("mongodb://localhost:27017/grpc-store")
 
     mongoose.connection.on("connected", () => {
       console.log("✅ —> Mongoose connected to DB")
@@ -31,7 +27,3 @@ class DBConnection {
     return DBConnection.instance
   }
 }
-
-const dbConnection = DBConnection.getInstance()
-
-export default dbConnection

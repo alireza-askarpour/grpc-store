@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
 import chalk from "chalk"
+import dotenv from "dotenv"
 import createError from "http-errors"
 import { NextFunction, Request, Response } from "express"
 
@@ -25,8 +25,8 @@ export const globalErrorHandler = (
   next: NextFunction
 ) => {
   const serverError = createError.InternalServerError("INTERNAL_SERVER_ERROR")
-  const statusCode = err.status || serverError.status
-  const message = err.message || serverError.message
+  const statusCode = err?.status || serverError.status
+  const message = err?.message || serverError.message
   res.status(statusCode).json({
     success: false,
     statusCode,

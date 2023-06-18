@@ -1,0 +1,4 @@
+export enum Messages {
+  INVALID_MOBILE = "INVALID_MOBILE",
+  INVALID_CODE = "INVALID_CODE",
+}

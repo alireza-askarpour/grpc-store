@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package authPackage;
+
+message GetOTP {
+    string mobile = 1;
+}
+
+message CheckOTP {
+    string mobile = 1;
+    string code = 2;
+}
+
+message CheckOTPResponse {
+    string accessToken = 1;
+}
+
+message GetOTPResponse {
+    string mobile = 1;
+    string code = 2;
+}
+
+service AuthService {
+    rpc getOtp (GetOTP) returns (GetOTPResponse);
+    rpc checkOtp (CheckOTP) returns (CheckOTPResponse);
+}
