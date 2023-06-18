@@ -1,7 +1,7 @@
 {
   "name": "auth",
   "version": "1.0.0",
-  "description": "",
+  "description": "gRPC auth service",
   "scripts": {
     "dev": "nodemon --watch ./ --exec ts-node auth.service.ts"
   },
@@ -16,9 +16,7 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",
-    "i": "^0.3.7",
     "nodemon": "2.0.22",
-    "npm": "^9.7.1",
     "ts-node": "10.9.1",
     "typescript": "5.1.3"
   }
