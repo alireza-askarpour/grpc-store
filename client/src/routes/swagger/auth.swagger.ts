@@ -28,7 +28,7 @@
  * @swagger
  *    /auth/get-otp:
  *       post:
- *          tags: [User-Authentication]
+ *          tags: [Auth]
  *          summary: login user in account with phone number
  *          description: one time password(OTP) login
  *          requestBody:
@@ -55,7 +55,7 @@
  * @swagger
  *    /auth/check-otp:
  *       post:
- *          tags: [User-Authentication]
+ *          tags: [Auth]
  *          summary: check-otp value in user controller
  *          description: check otp with code - mobile and expires dete
  *          requestBody:

@@ -13,7 +13,7 @@ const protoPath = path.join(__dirname, "..", "..", "proto", "auth.proto")
 const authProto = protoLoader.loadSync(protoPath)
 const { authPackage } = grpc.loadPackageDefinition(authProto) as any
 
-const port = process.env.SERVICE_URL || "http://localhost:3001"
+const port = process.env.SERVICE_URL || "localhost:3001"
 
 const server = new grpc.Server()
 server.addService(authPackage.AuthService.service, {
@@ -21,11 +21,12 @@ server.addService(authPackage.AuthService.service, {
   checkOtp,
 })
 
-server.bindAsync(port, grpc.ServerCredentials.createInsecure(), (err, bindPort) => {
+server.bindAsync(port, grpc.ServerCredentials.createInsecure(), (err, port) => {
   if (err) {
     console.error(err.message)
-    return
+    process.exit(1)
+  } else {
+    server.start()
+    console.info(`🏁 —> Auth service running on port ${port}`)
   }
-  console.log("gRPC ProductService Running on port " + bindPort)
-  server.start()
 })

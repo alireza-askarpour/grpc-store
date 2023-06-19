@@ -6,11 +6,11 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "*": ["src/*"]
+      "*": ["./*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["./*"],
   "exclude": ["node_modules"]
 }

@@ -12,7 +12,7 @@ const protoPath = path.join(__dirname, "..", "..", "..", "proto", "auth.proto")
 const authProto = protoLoader.loadSync(protoPath)
 const { authPackage } = grpc.loadPackageDefinition(authProto) as any
 const authClient = new authPackage.AuthService(
-  process.env.SERVICE_URL,
+  process.env.AUTH_SERVICE_URL,
   grpc.credentials.createInsecure()
 )
 
