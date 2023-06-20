@@ -22,7 +22,6 @@ const UserSchema = new mongoose.Schema(
     skills: { type: [mongoose.Types.ObjectId], default: [] },
     basket: {
       type: [mongoose.Types.ObjectId],
-      unique: true,
       default: [],
       ref: "course",
     },

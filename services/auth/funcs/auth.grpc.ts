@@ -1,7 +1,7 @@
 import JWT from "jsonwebtoken"
 import * as grpc from "@grpc/grpc-js"
 
-import UserModel from "../../users/models/user.model"
+import UserModel from "../models/user.model"
 import { generateRandomNumber } from "./generate-number.utils"
 
 export const getOtp = async (call: any, callback: any) => {
