@@ -21,8 +21,8 @@ export const createCategory = (req: Request, res: Response, next: NextFunction) 
   if (error?.message) throw createError.BadRequest(error.message)
 
   categoryClient.createCategory(value, (err: grpc.ServiceError, data: any) => {
-    console.log('test')
     if (err) return next(convertGrpcErrorToHttpError(err))
+
     res.status(HttpStatus.CREATED).json({
       success: true,
       statusCode: HttpStatus.CREATED,
