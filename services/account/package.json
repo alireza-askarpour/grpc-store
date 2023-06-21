@@ -14,7 +14,8 @@
     "@grpc/grpc-js": "1.8.15",
     "@grpc/proto-loader": "^0.7.7",
     "dotenv": "^16.3.1",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",

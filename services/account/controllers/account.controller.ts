@@ -1,8 +1,7 @@
-import JWT from "jsonwebtoken"
 import * as grpc from "@grpc/grpc-js"
-
 import UserModel from "../models/user.model"
-import { generateRandomNumber } from "./generate-number.utils"
+import { generateRandomNumber } from "../utils/generate-number.utils"
+import { tokenGenerator } from "../utils/sign-access-token.utils"
 
 export const getOtp = async (call: any, callback: any) => {
   try {
@@ -76,29 +75,10 @@ export const checkOtp = async (call: any, callback: any) => {
         null
       )
 
-    const accessToken = await signAccessToken(user._id)
+    const accessToken = tokenGenerator(user._id)
 
     return callback(null, { accessToken })
   } catch (err) {
     callback(err, null)
   }
-}
-
-export const signAccessToken = (userId: string) => {
-  return new Promise(async (resolve, reject) => {
-    const user: any = await UserModel.findById(userId)
-    const privateKey: string = process.env.ACCESS_TOKEN_SECRET_KEY || "tset"
-
-    const payload = {
-      mobile: user.mobile,
-    }
-    const options = {
-      expiresIn: "30d",
-    }
-
-    JWT.sign(payload, privateKey, options, function (err, token) {
-      if (err) reject({ status: grpc.status.INTERNAL, message: "INTERNAL_SERVER_ERROR" })
-      resolve(token)
-    })
-  })
 }
