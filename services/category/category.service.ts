@@ -6,7 +6,7 @@ import * as protoLoader from "@grpc/proto-loader"
 import { PORT, DB_URI } from "./config/app.config"
 import DBConnection from "./config/database.config"
 
-import { createCategory } from "./controller/category.controller"
+import { createCategory, updateCategory } from "./controller/category.controller"
 
 dotenv.config()
 DBConnection(DB_URI)
@@ -18,6 +18,7 @@ const { categoryPackage } = grpc.loadPackageDefinition(categoryProto) as any
 const server = new grpc.Server()
 server.addService(categoryPackage.CategoryService.service, {
   createCategory,
+  updateCategory,
 })
 
 server.bindAsync(PORT, grpc.ServerCredentials.createInsecure(), (err, port) => {

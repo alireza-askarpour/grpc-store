@@ -11,3 +11,11 @@ export const createCategorySchema = Joi.object({
     .pattern(MONGO_ID_PATTERN)
     .error(createError.BadRequest(Messages.INVALID_PARENT)),
 })
+
+export const updateCategorySchema = Joi.object({
+  name: Joi.string().error(createError.BadRequest(Messages.INVALID_CODE)),
+  value: Joi.string().error(createError.BadRequest(Messages.INVALID_VALUE)),
+  parent: Joi.string()
+    .pattern(MONGO_ID_PATTERN)
+    .error(createError.BadRequest(Messages.INVALID_PARENT)),
+})

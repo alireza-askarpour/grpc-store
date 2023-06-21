@@ -5,7 +5,13 @@ import { StatusCodes as HttpStatus } from "http-status-codes"
 import * as grpc from "@grpc/grpc-js"
 import * as protoLoader from "@grpc/proto-loader"
 
-import { createCategorySchema } from "../validations/category.validation"
+import {
+  createCategorySchema,
+  updateCategorySchema,
+} from "../validations/category.validation"
+import { objectIdValidation } from "../validations/public.validation"
+
+import { catchAsync } from "../utils/catch-async"
 import { convertGrpcErrorToHttpError } from "../utils/convert-grpc-error-to-http"
 
 const protoPath = path.join(__dirname, "..", "..", "..", "proto", "category.proto")
@@ -30,3 +36,28 @@ export const createCategory = (req: Request, res: Response, next: NextFunction) 
     })
   })
 }
+
+/**
+ * Update category by ID
+ */
+export const updateCategory = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const dataParams = await objectIdValidation.validateAsync(req.params)
+    const dataBody = await updateCategorySchema.validateAsync(req.body)
+
+    const category = {
+      ...dataBody,
+      _id: dataParams.id,
+    }
+
+    categoryClient.updateCategory(category, (err: grpc.ServiceError, data: any) => {
+      if (err) return next(convertGrpcErrorToHttpError(err))
+
+      res.status(HttpStatus.OK).json({
+        success: true,
+        statusCode: HttpStatus.OK,
+        data,
+      })
+    })
+  }
+)

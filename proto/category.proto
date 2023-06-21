@@ -2,12 +2,6 @@ syntax = "proto3";
 import "google/protobuf/any.proto";
 package categoryPackage;
 
-message CreateCategory {
-    string name = 1;
-    string value = 2;
-    string parent = 3;
-}
-
 message Category {
     string name = 1;
     string value = 2;
@@ -15,6 +9,25 @@ message Category {
     string _id = 4;
 }
 
+message CategoryList {
+    repeated Category categories = 1;
+}
+
+message CreateCategory {
+    string name = 1;
+    string value = 2;
+    string parent = 3;
+}
+
+message CategoryId {
+    string _id = 1;
+}
+
+message Response {
+    string status = 1;
+}
+
 service CategoryService {
     rpc createCategory (CreateCategory) returns (Category);
+    rpc updateCategory (Category) returns (Response);
 }
