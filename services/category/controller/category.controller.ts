@@ -51,3 +51,27 @@ export const updateCategory = async (call: any, callback: any) => {
     callback(err, null)
   }
 }
+
+export const removeCategory = async (call: any, callback: any) => {
+  try {
+    const { _id } = call.request
+
+    const existCategory = await CategoryModel.findById(_id)
+    if (!existCategory)
+      return callback(
+        { code: grpc.status.NOT_FOUND, message: "NOT_FOUND_CATEGORY" },
+        null
+      )
+
+    const updatedCategory = await CategoryModel.deleteOne({ _id })
+    if (updatedCategory.deletedCount == 0)
+      return callback(
+        { code: grpc.status.INTERNAL, messae: "FAILED_REMOVE_CATEGORY" },
+        null
+      )
+
+    callback(null, { status: "REMOVED" })
+  } catch (err) {
+    callback(err, null)
+  }
+}

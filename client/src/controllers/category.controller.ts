@@ -61,3 +61,24 @@ export const updateCategory = catchAsync(
     })
   }
 )
+
+/**
+ * Update category by ID
+ */
+export const removeCategory = (req: Request, res: Response, next: NextFunction) => {
+  const { error, value } = objectIdValidation.validate(req.params)
+  if (error?.message) throw createError.BadRequest(error.message)
+
+  categoryClient.removeCategory(
+    { _id: value.id },
+    (err: grpc.ServiceError, data: any) => {
+      if (err) return next(convertGrpcErrorToHttpError(err))
+
+      res.status(HttpStatus.OK).json({
+        success: true,
+        statusCode: HttpStatus.OK,
+        data,
+      })
+    }
+  )
+}

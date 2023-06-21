@@ -87,3 +87,26 @@
  *                description: Internal server error
  *
  */
+
+/**
+ * @swagger
+ *    /category/{id}:
+ *       delete:
+ *          tags: [Category]
+ *          summary: remvoe a category
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: string
+ *                  required: true
+ *          responses:
+ *             200:
+ *                description: Category updated successfully
+ *             400:
+ *                description: Bad request
+ *             401:
+ *                description: Unauthorization
+ *             500:
+ *                description: Internal server error
+ *
+ */

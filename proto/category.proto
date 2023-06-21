@@ -30,4 +30,5 @@ message Response {
 service CategoryService {
     rpc createCategory (CreateCategory) returns (Category);
     rpc updateCategory (Category) returns (Response);
+    rpc removeCategory (CategoryId) returns (Response);
 }
