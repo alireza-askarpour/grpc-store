@@ -1,6 +1,15 @@
 import * as grpc from "@grpc/grpc-js"
 import CategoryModel from "../models/category.model"
 
+export const getCategories = async (call: any, callback: any) => {
+  try {
+    const categories = await CategoryModel.find()
+    callback(null, { categories })
+  } catch (err) {
+    callback(err, null)
+  }
+}
+
 export const createCategory = async (call: any, callback: any) => {
   try {
     const { name, value, parent } = call.request

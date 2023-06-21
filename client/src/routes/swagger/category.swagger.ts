@@ -34,6 +34,24 @@
 /**
  * @swagger
  *    /category:
+ *       get:
+ *          tags: [Category]
+ *          summary: get all category
+ *          responses:
+ *             200:
+ *                description: Category created successfully
+ *             400:
+ *                description: Bad request
+ *             401:
+ *                description: Unauthorization
+ *             500:
+ *                description: Internal server error
+ *
+ */
+
+/**
+ * @swagger
+ *    /category:
  *       post:
  *          tags: [Category]
  *          summary: create new category

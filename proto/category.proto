@@ -27,7 +27,10 @@ message Response {
     string status = 1;
 }
 
+message Empty {}
+
 service CategoryService {
+    rpc getCategories (Empty) returns (CategoryList);
     rpc createCategory (CreateCategory) returns (Category);
     rpc updateCategory (Category) returns (Response);
     rpc removeCategory (CategoryId) returns (Response);

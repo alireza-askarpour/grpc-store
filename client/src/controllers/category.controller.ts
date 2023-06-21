@@ -22,6 +22,24 @@ const categoryClient = new categoryPackage.CategoryService(
   grpc.credentials.createInsecure()
 )
 
+/**
+ * Get category list
+ */
+export const getCategories = (req: Request, res: Response, next: NextFunction) => {
+  categoryClient.getCategories({}, (err: grpc.ServiceError, data: any) => {
+    if (err) return next(convertGrpcErrorToHttpError(err))
+
+    res.status(HttpStatus.OK).json({
+      success: true,
+      statusCode: HttpStatus.OK,
+      data,
+    })
+  })
+}
+
+/**
+ * Create a category
+ */
 export const createCategory = (req: Request, res: Response, next: NextFunction) => {
   const { error, value } = createCategorySchema.validate(req.body)
   if (error?.message) throw createError.BadRequest(error.message)
@@ -63,7 +81,7 @@ export const updateCategory = catchAsync(
 )
 
 /**
- * Update category by ID
+ * Remove category by ID
  */
 export const removeCategory = (req: Request, res: Response, next: NextFunction) => {
   const { error, value } = objectIdValidation.validate(req.params)
