@@ -4,19 +4,19 @@ import * as grpc from "@grpc/grpc-js"
 import * as protoLoader from "@grpc/proto-loader"
 
 import { DBConnection } from "../config/database.config"
-import { getOtp, checkOtp } from "./funcs/auth.grpc"
+import { getOtp, checkOtp } from "./funcs/account.grpc"
 
 dotenv.config()
 DBConnection.getInstance()
 
-const protoPath = path.join(__dirname, "..", "..", "proto", "auth.proto")
-const authProto = protoLoader.loadSync(protoPath)
-const { authPackage } = grpc.loadPackageDefinition(authProto) as any
+const protoPath = path.join(__dirname, "..", "..", "proto", "account.proto")
+const accountProto = protoLoader.loadSync(protoPath)
+const { accountPackage } = grpc.loadPackageDefinition(accountProto) as any
 
 const port = process.env.SERVICE_URL || "localhost:3001"
 
 const server = new grpc.Server()
-server.addService(authPackage.AuthService.service, {
+server.addService(accountPackage.AccountService.service, {
   getOtp,
   checkOtp,
 })
@@ -27,6 +27,6 @@ server.bindAsync(port, grpc.ServerCredentials.createInsecure(), (err, port) => {
     process.exit(1)
   } else {
     server.start()
-    console.info(`🏁 —> Auth service running on port ${port}`)
+    console.info(`🏁 —> Account service running on port ${port}`)
   }
 })

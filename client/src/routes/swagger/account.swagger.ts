@@ -26,7 +26,7 @@
 
 /**
  * @swagger
- *    /auth/get-otp:
+ *    /account/get-otp:
  *       post:
  *          tags: [Auth]
  *          summary: login user in account with phone number
@@ -53,7 +53,7 @@
 
 /**
  * @swagger
- *    /auth/check-otp:
+ *    /account/check-otp:
  *       post:
  *          tags: [Auth]
  *          summary: check-otp value in user controller

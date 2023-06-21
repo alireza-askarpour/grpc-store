@@ -1,9 +1,11 @@
 {
-  "name": "auth",
+  "name": "account",
   "version": "1.0.0",
-  "description": "gRPC auth service",
+  "description": "gRPC account service",
   "scripts": {
-    "dev": "nodemon --watch ./ --exec ts-node auth.service.ts"
+    "start": "node build account.service.js",
+    "dev": "nodemon --watch ./ --exec ts-node account.service.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package authPackage;
+package accountPackage;
 
 message GetOTP {
     string mobile = 1;
@@ -20,7 +20,7 @@ message GetOTPResponse {
     string code = 2;
 }
 
-service AuthService {
+service AccountService {
     rpc getOtp (GetOTP) returns (GetOTPResponse);
     rpc checkOtp (CheckOTP) returns (CheckOTPResponse);
 }

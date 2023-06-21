@@ -1,5 +1,5 @@
 import express from "express"
-import { checkOtp, getOtp } from "../controllers/auth.controller"
+import { checkOtp, getOtp } from "../controllers/account.controller"
 
 const router = express.Router()
 
