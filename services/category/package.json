@@ -2,13 +2,16 @@
   "name": "category",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon --watch ./ --exec ts-node category.service.ts"
+    "start": "node build account.service.js",
+    "dev": "nodemon --watch ./ --exec ts-node category.service.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "license": "ISC",
   "dependencies": {
     "@grpc/grpc-js": "1.8.15",
     "@grpc/proto-loader": "0.7.7",
+    "dotenv": "^16.3.1",
     "mongoose": "^7.3.0"
   },
   "devDependencies": {
