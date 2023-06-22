@@ -6,7 +6,7 @@ import * as protoLoader from "@grpc/proto-loader"
 import { PORT, DB_URI } from "./config/app.config"
 import DBConnection from "./config/database.config"
 
-import { createProduct } from "./controllers/product.controller"
+import { createProduct, updateProduct } from "./controllers/product.controller"
 
 dotenv.config()
 DBConnection(DB_URI)
@@ -19,6 +19,7 @@ const { productPackage } = grpc.loadPackageDefinition(productProto) as any
 const server = new grpc.Server()
 server.addService(productPackage.ProductService.service, {
   createProduct,
+  updateProduct,
 })
 
 server.bindAsync(PORT, grpc.ServerCredentials.createInsecure(), (err, port) => {

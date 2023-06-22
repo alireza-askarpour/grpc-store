@@ -10,7 +10,7 @@ import { listOfImagesFromRequest } from "../utils/images-from-request.utils"
 import { convertGrpcErrorToHttpError } from "../utils/convert-grpc-error-to-http"
 
 import { objectIdValidation } from "../validations/public.validation"
-import { createProductValidation } from "../validations/product.validation"
+import { createProductValidation, updateProductValidation } from "../validations/product.validation"
 
 const protoPath = path.join(__dirname, "..", "..", "..", "proto", "product.proto")
 
@@ -44,6 +44,38 @@ export const createProduct = async (req: any, res: Response, next: NextFunction)
       success: true,
       statusCode: HttpStatus.CREATED,
       message: "PRODUCT_CREATED_SUCCESS",
+    })
+  } catch (err) {
+    if (req?.files) {
+      const images = listOfImagesFromRequest(req.files)
+      await deleteFile(images)
+    }
+    next(err)
+  }
+}
+
+export const updateProduct = async (req: any, res: Response, next: NextFunction) => {
+  try {
+    if (!req.body?.tags) req.body.tags = []
+
+    if (req?.files) {
+      const images = listOfImagesFromRequest(req.files)
+      req.body.images = images
+    }
+
+    const { id: _id } = await objectIdValidation.validateAsync({ id: req.params.id })
+    const productDataBody = await updateProductValidation.validateAsync(req.body)
+
+    const product = { ...productDataBody, _id }
+
+    productClient.updateProduct(product, (err: grpc.ServiceError) => {
+      if (err) return next(convertGrpcErrorToHttpError(err))
+
+      res.status(HttpStatus.OK).json({
+        success: true,
+        statusCode: HttpStatus.OK,
+        message: "PRODUCT_CREATED_UPDATED",
+      })
     })
   } catch (err) {
     if (req?.files) {

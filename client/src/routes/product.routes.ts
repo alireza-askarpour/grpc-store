@@ -15,4 +15,12 @@ router.post(
   productControllers.createProduct
 )
 
+router.patch(
+  "/:id",
+  verifyAccessToken,
+  uploadImage.array("images"),
+  stringToArray("tags"),
+  productControllers.updateProduct
+)
+
 export default router

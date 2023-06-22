@@ -13,3 +13,13 @@ export const createProductValidation = Joi.object({
   price: Joi.number().required().error(createError.BadRequest(Messages.INVALID_PRICE)),
   count: Joi.number().required().error(createError.BadRequest(Messages.INVALID_COUNT)),
 })
+
+export const updateProductValidation = Joi.object({
+  title: Joi.string().error(createError.BadRequest(Messages.INVALID_TITLE)),
+  description: Joi.string().error(createError.BadRequest(Messages.INVALID_DESCRIPTION)),
+  images: Joi.array().items(Joi.string()).error(createError.BadRequest(Messages.INVALID_IMAGES)),
+  tags: Joi.array().items(Joi.string()).error(createError.BadRequest(Messages.INVALID_TAGS)),
+  category: Joi.string().pattern(MONGO_ID_PATTERN).error(createError.BadRequest(Messages.INVALID_CATEGORY)),
+  price: Joi.number().error(createError.BadRequest(Messages.INVALID_PRICE)),
+  count: Joi.number().error(createError.BadRequest(Messages.INVALID_COUNT)),
+})

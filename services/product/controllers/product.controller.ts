@@ -13,3 +13,17 @@ export const createProduct = async (call: any, callback: any) => {
     call(err, null)
   }
 }
+
+export const updateProduct = async (call: any, callback: any) => {
+  try {
+    const product = call.request
+
+    const updatedResult = await ProductModel.updateOne({ _id: product._id }, { $set: product })
+    if (updatedResult.modifiedCount == 0)
+      return callback({ code: grpc.status.INTERNAL, message: "FAILED_UPDATED_PRODUCT" })
+
+    callback(null, { status: "PRODUCT_UPDATED_SUCCESS" })
+  } catch (err) {
+    call(err, null)
+  }
+}
