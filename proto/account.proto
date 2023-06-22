@@ -2,11 +2,23 @@ syntax = "proto3";
 
 package accountPackage;
 
-message GetOTP {
+message User {
+    string first_name = 1;
+    string last_name = 2;
+    string mobile = 3;
+    string role = 5;
+    string avatar = 6;
+    string cover = 7;
+    string createdAt = 11;
+    string updatedAt = 12;
+    string _id = 13;
+}
+
+message GetOTPRequest {
     string mobile = 1;
 }
 
-message CheckOTP {
+message CheckOTPRequest {
     string mobile = 1;
     string code = 2;
 }
@@ -20,7 +32,16 @@ message GetOTPResponse {
     string code = 2;
 }
 
+message TokenRequest {
+    string accessToken = 1;
+}
+
+message TokenResponse {
+    User user = 1;
+}
+
 service AccountService {
-    rpc getOtp (GetOTP) returns (GetOTPResponse);
-    rpc checkOtp (CheckOTP) returns (CheckOTPResponse);
+    rpc getOtp (GetOTPRequest) returns (GetOTPResponse);
+    rpc checkOtp (CheckOTPRequest) returns (CheckOTPResponse);
+    rpc verifyAccessToken (TokenRequest) returns (TokenResponse);
 }

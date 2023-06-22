@@ -18,13 +18,6 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: { type: String, default: "" },
     cover: { type: String, default: "" },
-    courses: { type: [mongoose.Types.ObjectId], default: [] },
-    skills: { type: [mongoose.Types.ObjectId], default: [] },
-    basket: {
-      type: [mongoose.Types.ObjectId],
-      default: [],
-      ref: "course",
-    },
   },
   {
     versionKey: false,
