@@ -117,8 +117,30 @@
  *                   schema:
  *                      $ref: '#/components/schemas/EditProduct'
  *          responses:
- *             201:
+ *             200:
  *                description: Product updated successfully
+ *             400:
+ *                description: Bad request
+ *             401:
+ *                description: Unauthorized
+ *             500:
+ *                description: Internal server error
+ */
+
+/**
+ * @swagger
+ *    /product/{id}:
+ *       get:
+ *          tags: [Product]
+ *          summary: get a product by ID
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: string
+ *                  required: true
+ *          responses:
+ *             200:
+ *                description: Success
  *             400:
  *                description: Bad request
  *             401:

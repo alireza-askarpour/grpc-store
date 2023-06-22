@@ -12,7 +12,7 @@ message CreateProduct {
     int32 count = 8;
 }
 
-message UpdateProduct {
+message Product {
     string title = 1;
     string description = 2;
     repeated string images = 3;
@@ -24,11 +24,16 @@ message UpdateProduct {
     string _id = 9;
 }
 
+message ProductId {
+    string id = 1;
+}
+
 message Response {
     string status = 1;
 }
 
 service ProductService {
     rpc createProduct (CreateProduct) returns (Response);
-    rpc updateProduct (UpdateProduct) returns (Response);
+    rpc updateProduct (Product) returns (Response);
+    rpc getProduct (ProductId) returns (Product);
 }

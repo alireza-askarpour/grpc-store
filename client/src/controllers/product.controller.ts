@@ -85,3 +85,18 @@ export const updateProduct = async (req: any, res: Response, next: NextFunction)
     next(err)
   }
 }
+
+export const getProduct = (req: any, res: Response, next: NextFunction) => {
+  const { error, value } = objectIdValidation.validate({ id: req.params.id })
+  if (error?.message) throw createError.BadRequest(error?.message)
+
+  productClient.getProduct({ id: value.id }, (err: grpc.ServiceError, data: any) => {
+    if (err) return next(convertGrpcErrorToHttpError(err))
+
+    res.status(HttpStatus.OK).json({
+      success: true,
+      statusCode: HttpStatus.OK,
+      product: data,
+    })
+  })
+}
