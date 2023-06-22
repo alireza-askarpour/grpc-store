@@ -7,4 +7,6 @@
  *       description: managment account section
  *    -  name: Category
  *       description: managment category section
+ *    -  name: Product
+ *       description: managment product section
  */
