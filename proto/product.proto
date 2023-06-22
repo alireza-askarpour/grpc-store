@@ -24,6 +24,10 @@ message Product {
     string _id = 9;
 }
 
+message ProductList {
+    repeated Product products = 1;
+}
+
 message ProductId {
     string id = 1;
 }
@@ -32,8 +36,11 @@ message Response {
     string status = 1;
 }
 
+message Empty {}
+
 service ProductService {
     rpc createProduct (CreateProduct) returns (Response);
     rpc updateProduct (Product) returns (Response);
     rpc getProduct (ProductId) returns (Product);
+    rpc getProductList (Empty) returns (ProductList);
 }

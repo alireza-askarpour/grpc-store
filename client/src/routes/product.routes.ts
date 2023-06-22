@@ -23,6 +23,7 @@ router.patch(
   productControllers.updateProduct
 )
 
+router.get("/", productControllers.getProductList)
 router.get("/:id", productControllers.getProduct)
 
 export default router

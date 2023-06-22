@@ -100,3 +100,15 @@ export const getProduct = (req: any, res: Response, next: NextFunction) => {
     })
   })
 }
+
+export const getProductList = (req: any, res: Response, next: NextFunction) => {
+  productClient.getProductList({}, (err: grpc.ServiceError, data: any) => {
+    if (err) return next(convertGrpcErrorToHttpError(err))
+
+    res.status(HttpStatus.OK).json({
+      success: true,
+      statusCode: HttpStatus.OK,
+      products: data.products,
+    })
+  })
+}

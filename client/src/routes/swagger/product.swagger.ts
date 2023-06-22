@@ -148,3 +148,20 @@
  *             500:
  *                description: Internal server error
  */
+
+/**
+ * @swagger
+ *    /product:
+ *       get:
+ *          tags: [Product]
+ *          summary: get products list
+ *          responses:
+ *             200:
+ *                description: Success
+ *             400:
+ *                description: Bad request
+ *             401:
+ *                description: Unauthorized
+ *             500:
+ *                description: Internal server error
+ */

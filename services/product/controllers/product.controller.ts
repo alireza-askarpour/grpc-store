@@ -33,8 +33,19 @@ export const getProduct = async (call: any, callback: any) => {
     const id = call.request.id
     const product = await ProductModel.findById(id)
     if (!product) return callback({ code: grpc.status.NOT_FOUND, message: "PRODUCT_NOT_FOUND" })
-    
+
     callback(null, product)
+  } catch (err) {
+    callback(err, null)
+  }
+}
+
+export const getProductList = async (call: any, callback: any) => {
+  try {
+    const products = await ProductModel.find()
+    if (!products) return callback({ code: grpc.status.INTERNAL, message: "FAILED_GET_PRODUCTS" })
+    
+    callback(null, { products })
   } catch (err) {
     callback(err, null)
   }
