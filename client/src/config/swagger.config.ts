@@ -8,8 +8,7 @@ export const swaggerSetup = swaggerUI.setup(
       info: {
         title: "gRPC Store",
         version: "1.0.0",
-        description:
-          "The gRPC Store application built using gRPC, Node.js, TypeScript, Express and MongoDB",
+        description: "The gRPC Store application built using gRPC, Node.js, TypeScript, Express and MongoDB",
         contact: {
           name: "Alireza Askarpour",
           email: "askarpourdev@gmail.com",
@@ -20,6 +19,16 @@ export const swaggerSetup = swaggerUI.setup(
           url: process.env.BASE_URL,
         },
       ],
+      components: {
+        securitySchemes: {
+          BearerAuth: {
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT",
+          },
+        },
+      },
+      security: [{ BearerAuth: [] }],
     },
     apis: ["./src/routes/swagger/*.ts"],
   })

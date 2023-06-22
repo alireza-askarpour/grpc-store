@@ -77,3 +77,20 @@
  *             500:
  *                description: internal server error
  */
+
+/**
+ * @swagger
+ *    /account/me:
+ *       get:
+ *          tags: [Account]
+ *          summary: get logged in user
+ *          responses:
+ *             201:
+ *                description: Success
+ *             400:
+ *                description: Bad request
+ *             401:
+ *                description: Unauthorization
+ *             500:
+ *                description: Internal server error
+ */
