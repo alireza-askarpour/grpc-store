@@ -79,7 +79,29 @@ export const addToBasket = (req: any, res: Response, next: NextFunction) => {
     res.status(HttpStatus.OK).json({
       success: true,
       statusCode: HttpStatus.OK,
-      data,
+      message: data.status,
+    })
+  })
+}
+
+export const removeFromBasket = (req: any, res: Response, next: NextFunction) => {
+  const productId = req.params.productId
+
+  const { error, value } = objectIdValidation.validate({ id: productId })
+  if (error?.message) throw createError.BadRequest("INVALID_PRODUCT_ID")
+
+  const data = {
+    productId: value.id,
+    userId: req.user?._id,
+  }
+
+  accountClient.removeFromBasket(data, (err: grpc.ServiceError, data: { status: string }) => {
+    if (err) return next(convertGrpcErrorToHttpError(err))
+
+    res.status(HttpStatus.OK).json({
+      success: true,
+      statusCode: HttpStatus.OK,
+      message: data.status,
     })
   })
 }

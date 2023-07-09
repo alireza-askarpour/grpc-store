@@ -107,7 +107,29 @@
  *                  type: string
  *                  required: true
  *          responses:
- *             201:
+ *             200:
+ *                description: Success
+ *             400:
+ *                description: Bad Request
+ *             401:
+ *                description: Unauthorized
+ *             500:
+ *                description: Internal Server Error
+ */
+
+/**
+ * @swagger
+ *    /account/basket/remove/{productId}:
+ *       patch:
+ *          tags: [Account]
+ *          summary: remove product from basket
+ *          parameters:
+ *              -   in: path
+ *                  name: productId
+ *                  type: string
+ *                  required: true
+ *          responses:
+ *             200:
  *                description: Success
  *             400:
  *                description: Bad Request

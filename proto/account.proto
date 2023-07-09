@@ -40,12 +40,12 @@ message TokenResponse {
     User user = 1;
 }
 
-message AddToBaketRequest {
+message BaketRequest {
     string userId = 1;
     string productId = 2; 
 }
 
-message AddToBaketResponse {
+message BaketResponse {
     string status = 1;
 }
 
@@ -53,5 +53,6 @@ service AccountService {
     rpc getOtp (GetOTPRequest) returns (GetOTPResponse);
     rpc checkOtp (CheckOTPRequest) returns (CheckOTPResponse);
     rpc verifyAccessToken (TokenRequest) returns (TokenResponse);
-    rpc addToBasket (AddToBaketRequest) returns (AddToBaketResponse);
+    rpc addToBasket (BaketRequest) returns (BaketResponse);
+    rpc removeFromBasket (BaketRequest) returns (BaketResponse);
 }

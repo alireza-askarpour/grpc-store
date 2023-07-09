@@ -6,7 +6,7 @@ import * as protoLoader from "@grpc/proto-loader"
 import { PORT, DB_URI } from "./config/app.config"
 import DBConnection from "./config/database.config"
 
-import { getOtp, checkOtp, verifyAccessToken, addToBasket } from "./controllers/account.controller"
+import { getOtp, checkOtp, verifyAccessToken, addToBasket, removeFromBasket } from "./controllers/account.controller"
 
 dotenv.config()
 DBConnection(DB_URI)
@@ -21,6 +21,7 @@ server.addService(accountPackage.AccountService.service, {
   checkOtp,
   verifyAccessToken,
   addToBasket,
+  removeFromBasket,
 })
 
 server.bindAsync(PORT, grpc.ServerCredentials.createInsecure(), (err, port) => {
