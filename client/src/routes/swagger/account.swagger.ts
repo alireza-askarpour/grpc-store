@@ -94,3 +94,25 @@
  *             500:
  *                description: Internal server error
  */
+
+/**
+ * @swagger
+ *    /account/basket/add/{productId}:
+ *       patch:
+ *          tags: [Account]
+ *          summary: add product to basket
+ *          parameters:
+ *              -   in: path
+ *                  name: productId
+ *                  type: string
+ *                  required: true
+ *          responses:
+ *             201:
+ *                description: Success
+ *             400:
+ *                description: Bad Request
+ *             401:
+ *                description: Unauthorized
+ *             500:
+ *                description: Internal Server Error
+ */

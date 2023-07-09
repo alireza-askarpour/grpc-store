@@ -83,3 +83,27 @@ export const verifyAccessToken = async (call: any, callback: any) => {
     callback(err, null)
   }
 }
+
+export const addToBasket = async (call: any, callback: any) => {
+  try {
+    const { userId, productId } = call.request
+
+    // check exist user
+    const user = await UserModel.findById(userId)
+    if (!user) {
+      return callback({ code: grpc.status.NOT_FOUND, message: "USER_NOT_FOUND" }, null)
+    }
+
+    // check exist product
+    const product = await UserModel.findOne({ _id: userId, basket: productId })
+    if (product) {
+      return callback({ code: grpc.status.INVALID_ARGUMENT, message: "PRODUCT_ALREADY_EXISTS" }, null)
+    }
+
+    await UserModel.updateOne({ _id: userId }, { $push: { basket: productId } })
+
+    callback(null, { status: "PRODUCT_ADDEDD_TO_BASKET" })
+  } catch (err) {
+    callback(err, null)
+  }
+}

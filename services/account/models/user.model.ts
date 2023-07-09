@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: { type: String, default: "" },
     cover: { type: String, default: "" },
+    basket: { type: [mongoose.Types.ObjectId], default: [] },
   },
   {
     versionKey: false,

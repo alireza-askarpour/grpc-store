@@ -40,8 +40,18 @@ message TokenResponse {
     User user = 1;
 }
 
+message AddToBaketRequest {
+    string userId = 1;
+    string productId = 2; 
+}
+
+message AddToBaketResponse {
+    string status = 1;
+}
+
 service AccountService {
     rpc getOtp (GetOTPRequest) returns (GetOTPResponse);
     rpc checkOtp (CheckOTPRequest) returns (CheckOTPResponse);
     rpc verifyAccessToken (TokenRequest) returns (TokenResponse);
+    rpc addToBasket (AddToBaketRequest) returns (AddToBaketResponse);
 }

@@ -6,6 +6,8 @@ import * as grpc from "@grpc/grpc-js"
 import * as protoLoader from "@grpc/proto-loader"
 
 import { checkOtpSchema, getOtpSchema } from "../validations/account.validation"
+import { objectIdValidation } from "../validations/public.validation"
+
 import { convertGrpcErrorToHttpError } from "../utils/convert-grpc-error-to-http"
 import { catchAsync } from "../utils/catch-async"
 
@@ -59,3 +61,25 @@ export const getMe = catchAsync(async (req: any, res: Response) => {
     user: req.user,
   })
 })
+
+export const addToBasket = (req: any, res: Response, next: NextFunction) => {
+  const productId = req.params.productId
+
+  const { error, value } = objectIdValidation.validate({ id: productId })
+  if (error?.message) throw createError.BadRequest("INVALID_PRODUCT_ID")
+
+  const data = {
+    productId: value.id,
+    userId: req.user?._id,
+  }
+
+  accountClient.addToBasket(data, (err: grpc.ServiceError, data: { status: string }) => {
+    if (err) return next(convertGrpcErrorToHttpError(err))
+
+    res.status(HttpStatus.OK).json({
+      success: true,
+      statusCode: HttpStatus.OK,
+      data,
+    })
+  })
+}
